@@ -18,7 +18,60 @@
 
 package main
 
-func main() {
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strconv"
+	"strings"
+)
+
+const (
+	CmdHello   = "hello"
+	CmdGoodbye = "bye"
+)
+
+func New() {
+	scanner := bufio.NewScanner(os.Stdin)
+	numLines := 0
+	numCommands := 0
+	for scanner.Scan() {
+		if strings.ToUpper(scanner.Text()) == "Q" {
+			break
+		} else {
+			text := strings.TrimSpace(scanner.Text())
+			switch text {
+			case CmdHello:
+				numCommands += 1
+				fmt.Println("command response: hi")
+			case CmdGoodbye:
+				numCommands += 1
+				fmt.Println("command response: bye")
+			}
+			if text != "" {
+				numLines += 1
+			}
+		}
+	}
+	fmt.Printf("You entered %v Lines\n", numLines)
+	fmt.Printf("You entered %v Commands\n", numCommands)
 
 }
 
+func main() {
+	scanner := bufio.NewScanner(os.Stdin)
+	sum := 0
+	for scanner.Scan() {
+		num, err := strconv.Atoi(scanner.Text())
+		if err != nil {
+			fmt.Println("Not a valid number")
+		} else {
+			sum += num
+		}
+
+		if strings.ToUpper(scanner.Text()) == "Q" {
+			break
+		}
+	}
+	fmt.Println(sum)
+}
