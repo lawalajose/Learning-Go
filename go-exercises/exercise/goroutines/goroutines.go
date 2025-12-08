@@ -28,15 +28,50 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"io"
 	"os"
 	"strconv"
-	"time"
 )
+
+func sumNum(bytes []byte) int {
+	var num string
+	var storeNum []string
+	var sum int
+
+	for _, r := range bytes {
+		if r != '\n' {
+			num += string(r)
+		} else {
+			storeNum = append(storeNum, num)
+			num = ""
+		}
+	}
+	for i := 0; i < len(storeNum); i++ {
+		digit, _ := strconv.Atoi(storeNum[i])
+		sum += digit
+	}
+	return sum
+}
+func sumNum1(fold string) int {
+	file, err := os.Open(fold)
+	if err != nil {
+		fmt.Printf("Error :%v ", err)
+	}
+	defer file.Close()
+
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		line := scanner.Text()
+		fmt.Println(line)
+	}
+
+	if err := scanner.Err(); err != nil {
+		fmt.Printf("Scan error : %v", err)
+	}
+}
 
 func main() {
 	files := []string{"num1.txt", "num2.txt", "num3.txt", "num4.txt", "num5.txt"}
+	soln := sumNum1(files[3])
+	fmt.Println(soln)
+
 }
-
-
-

@@ -18,7 +18,10 @@
 
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"unicode"
+)
 
 func main() {
 	lines := []string{
@@ -38,13 +41,16 @@ func main() {
 		for _, r := range lines {
 			for _, i := range r {
 				all += 1
-				if i >= 'a' && i <= 'z' || i >= 'A' && i <= 'Z' {
+				if unicode.IsLetter(i) {
 					numlet += 1
-				} else if i == ' ' {
+				}
+				if i == ' ' {
 					numspaces += 1
-				} else if i >= '0' && i <= '9' {
+				}
+				if i >= '0' && i <= '9' {
 					numdigit += 1
-				} else {
+				}
+				if unicode.IsPunct(i) {
 					numpunc += 1
 				}
 			}

@@ -40,6 +40,17 @@ func makeJobs() []Job {
 func main() {
 	rand.New(rand.NewSource(time.Now().UnixNano()))
 	jobs := makeJobs()
+	sum := 0
+
+	for i := 0; i < len(jobs); i++ {
+		results := make(chan int)
+		go func() {
+			result := longCalculation(jobs[i])
+			results <- result
+		}()
+		result := <-results
+		sum += result
+	}
+	fmt.Println(sum)
+
 }
-
-

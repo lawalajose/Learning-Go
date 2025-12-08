@@ -18,6 +18,23 @@
 
 package main
 
+import (
+	"bufio"
+	"fmt"
+	"os"
+)
 
-func main() {}
+func main() {
+	reader := bufio.NewReader(os.Stdin)
+	fmt.Println("Enter :")
 
+	text, _ := reader.ReadString("Quit")
+	count := 0
+
+	for i := 0; i < len(text); i++ {
+		count += 1
+	}
+
+	fmt.Println("You typed", text, "number of text", count)
+
+}

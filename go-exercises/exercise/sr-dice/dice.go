@@ -38,7 +38,7 @@ func main() {
 	dice, sides := 2, 12
 	rolls := 1
 
-	for r := 1; i <= rolls; r++ {
+	for r := 1; r <= rolls; r++ {
 		sum := 0
 		for d := 1; i <= dice; d++ {
 			rolled := roll(sides)
